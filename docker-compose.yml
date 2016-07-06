@@ -15,7 +15,7 @@ services:
   container_name: logstash
   ports:
     - 5600:5600
-  command: sh -c "logstash -e 'input { syslog { } } output { stdout { } elasticsearch { hosts => [ \"elasticsearch\" ] } } filter { json { source => \"message\" } }'"
+  command: sh -c "logstash -e 'input {tcp { port => 5600 } } output { stdout { } elasticsearch { hosts => [ \"elasticsearch\" ] } } filter { json { source => \"message\" } }'"
   networks: 
     - ucp-elk-network
  
